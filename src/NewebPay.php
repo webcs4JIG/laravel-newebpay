@@ -148,7 +148,7 @@ class NewebPay extends BaseNewebPay
     public function tradeinfo($no, $amt)
     {
         $newebPay = new NewebPayTradeInfo($this->config);
-        $newebPay->setOrder($no, $amt);
+        $newebPay->setOrderInfo($no, $amt);
 
         return $newebPay;
     }
