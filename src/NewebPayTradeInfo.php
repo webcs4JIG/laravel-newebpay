@@ -11,25 +11,27 @@ class NewebPayTradeInfo extends BaseNewebPay
      */
     public function boot()
     {
-        $this->setApiPath('MPG/mpg_gateway');
-        $this->setSyncSender();
+        $this->setApiPath('API/QueryTradeInfo');
+        $this->setAsyncSender();
 
-        $this->setLangType();
-        $this->setTradeLimit();
-        $this->setExpireDate();
-        $this->setReturnURL();
         $this->setNotifyURL();
-        $this->setCustomerURL();
-        $this->setClientBackURL();
-        $this->setEmailModify();
-        $this->setLoginType();
-        $this->setOrderComment();
-        $this->setPaymentMethod();
-        $this->setTokenTerm();
-        $this->setCVSCOM();
-        $this->setLgsType();
+    }
 
-        $this->TradeData['MerchantID'] = $this->MerchantID;
+    /**
+     * Set Order.
+     *
+     * @param  string  $no
+     * @param  int  $amt
+     * @param  string  $desc
+     * @param  string  $email
+     * @return $this
+     */
+    public function setOrderInfo($no, $amt)
+    {
+        $this->TradeData['MerchantOrderNo'] = $no;
+        $this->TradeData['Amt'] = $amt;
+
+        return $this;
     }
 
     /**
@@ -39,14 +41,11 @@ class NewebPayTradeInfo extends BaseNewebPay
      */
     public function getRequestData()
     {
-        $tradeInfo = $this->encryptDataByAES($this->TradeData, $this->HashKey, $this->HashIV);
-        $tradeSha = $this->encryptDataBySHA($tradeInfo, $this->HashKey, $this->HashIV);
+        $postData = $this->encryptDataByAES($this->TradeData, $this->HashKey, $this->HashIV);
 
         return [
-            'MerchantID' => $this->MerchantID,
-            'TradeInfo' => $tradeInfo,
-            'TradeSha' => $tradeSha,
-            'Version' => $this->TradeData['Version'],
+            'MerchantID_' => $this->MerchantID,
+            'PostData_' => $postData,
         ];
     }
 }
