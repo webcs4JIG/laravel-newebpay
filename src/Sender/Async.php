@@ -1,10 +1,10 @@
 <?php
 
-namespace Ycs77\NewebPay\Sender;
+namespace Webcs4JIG\NewebPay\Sender;
 
 use GuzzleHttp\Client;
-use Ycs77\NewebPay\Contracts\HasHttp;
-use Ycs77\NewebPay\Contracts\Sender;
+use Webcs4JIG\NewebPay\Contracts\HasHttp;
+use Webcs4JIG\NewebPay\Contracts\Sender;
 
 class Async implements Sender, HasHttp
 {
@@ -40,7 +40,8 @@ class Async implements Sender, HasHttp
             'verify' => false,
         ];
 
-        $result = json_decode($this->http->post($url, $parameter)->getBody(), true);
+        // $result = json_decode($this->http->post($url, $parameter)->getBody(), true);
+        $result = $this->http->post($url, $parameter)->getBody();
 
         return $result;
     }
