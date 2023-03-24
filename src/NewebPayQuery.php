@@ -14,7 +14,7 @@ class NewebPayQuery extends BaseNewebPay
     public function boot()
     {
         $this->setApiPath('API/QueryTradeInfo');
-        $this->setSyncSender();
+        $this->setAsyncSender();
 
         $this->CheckValues['MerchantID'] = $this->MerchantID;
     }
