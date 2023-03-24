@@ -1,6 +1,6 @@
 <?php
 
-namespace Ycs77\NewebPay;
+namespace Webcs4JIG\NewebPay;
 
 class NewebPayQuery extends BaseNewebPay
 {
@@ -14,7 +14,7 @@ class NewebPayQuery extends BaseNewebPay
     public function boot()
     {
         $this->setApiPath('API/QueryTradeInfo');
-        $this->setAsyncSender();
+        $this->setSyncSender();
 
         $this->CheckValues['MerchantID'] = $this->MerchantID;
     }
